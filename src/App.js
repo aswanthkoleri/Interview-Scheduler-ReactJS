@@ -7,22 +7,12 @@ import List from './components/List'
 import Show from './components/Show'
 import Edit from './components/Edit'
 import {connect} from 'react-redux' 
-// import mapStateToProps from 'react-redux/lib/connect/mapStateToProps';
-// import mapDispatchToProps from 'react-redux/lib/connect/mapDispatchToProps';
-// import logo from './logo.svg';
-// import './App.css';
-
+import { getInterviews } from './actions/getInterviews'
 
 class App extends Component {
 
 componentWillMount=()=>{
-        fetch('http://localhost:3001/api/v1/interviews')
-    .then(results => {
-      return results.json();
-    }).then(data => {
-        this.props.getAllInterviews(data);
-    })
-    
+        this.props.dispatch(getInterviews())
 }
 
 render(){
@@ -42,13 +32,6 @@ render(){
 }
 const mapStateToProps=(state) => {
   return {
-    
   }
 }
-const mapDispatchToProps=(dispatch) => {
-  return {
-    getAllInterviews: (interviews)=>{ dispatch({type : 'GET_ALL_INTERVIEWS',data : interviews}) }
-  }
-}
-
-export default connect(mapStateToProps,mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);

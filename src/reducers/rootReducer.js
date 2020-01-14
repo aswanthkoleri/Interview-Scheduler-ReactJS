@@ -4,7 +4,6 @@ const initState = {
 
 const rootReducer = (state = initState,action) => {
     if(action.type === 'GET_ALL_INTERVIEWS'){
-
     return {
         ...state,
         interviews : action.data
