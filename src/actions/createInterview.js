@@ -4,7 +4,7 @@ export function createInterviewAction(date, start, end, title, participants) {
       date: date,
       start: start,
       end: end,
-      title: title,
+      title: title, 
       participantlist: participants
     });
     let url = "http://localhost:3001/api/v1/interviews/";

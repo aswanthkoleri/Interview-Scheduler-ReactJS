@@ -1,19 +1,19 @@
 import React, { Component } from "react";
 import { Route, BrowserRouter } from "react-router-dom";
+import { inject, observer } from "mobx-react";
 import Home from "./components/Home";
 import Create from "./components/Create";
 import Navbar from "./components/Navbar";
 import List from "./components/List";
 import Show from "./components/Show";
 import Edit from "./components/Edit";
-import { connect } from "react-redux";
-import { getInterviews } from "./actions/getInterviews";
 
+@inject("InterviewStore")
+@observer
 class App extends Component {
   componentDidMount = () => {
-    this.props.dispatch(getInterviews());
+    this.props.InterviewStore.fetchInterviews();
   };
-
   render() {
     return (
       <BrowserRouter>
@@ -29,7 +29,5 @@ class App extends Component {
     );
   }
 }
-const mapStateToProps = state => {
-  return {};
-};
-export default connect(mapStateToProps)(App);
+
+export default App;

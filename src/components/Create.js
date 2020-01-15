@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { createInterviewAction } from "../actions/createInterview";
+import { inject, observer } from "mobx-react";
+@inject("InterviewStore")
+@observer
 class Create extends Component {
   createInterview = e => {
     e.preventDefault();
@@ -9,10 +10,15 @@ class Create extends Component {
     const end = e.target.elements.end.value;
     const title = e.target.elements.title.value;
     const participants = e.target.elements.participants.value;
-    this.props.dispatch(
-      createInterviewAction(date, start, end, title, participants)
+    this.props.InterviewStore.createInterview(
+      date,
+      start,
+      end,
+      title,
+      participants
     );
   };
+
   render() {
     const jsx = (
       <div>
@@ -63,7 +69,4 @@ class Create extends Component {
     return jsx;
   }
 }
-const mapStateToProps = state => {
-  return {};
-};
-export default connect(mapStateToProps)(Create);
+export default Create;

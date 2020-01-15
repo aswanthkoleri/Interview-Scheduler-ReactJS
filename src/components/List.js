@@ -1,17 +1,17 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { deleteInterview } from "../actions/deleteInterview";
-
+import { inject, observer } from "mobx-react";
+@inject("InterviewStore")
+@observer
 class List extends Component {
   deleteInterview = id => {
-    this.props.dispatch(deleteInterview(id));
+    this.props.InterviewStore.deleteInterview(id);
     alert("Delete Successful");
   };
   render() {
     const jsx = (
       <div>
         <h1> Interviews Scheduled</h1>
-        {this.props.interviews.map(interview => (
+        {this.props.InterviewStore.interviews.map(interview => (
           <div key={interview.id}>
             <h3>{interview.title}</h3>
             <ul>
@@ -35,10 +35,5 @@ class List extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    interviews: state.interviews
-  };
-};
-export default connect(mapStateToProps)(List);
+export default List;
 // export default List
