@@ -9,6 +9,7 @@ class InterviewStore {
         return results.json();
       })
       .then(data => {
+        console.log(data);
         this.interviews = data;
       });
   };
@@ -71,7 +72,7 @@ class InterviewStore {
       participantlist: participants
     });
     let url = "http://localhost:3001/api/v1/interviews/" + id;
-    return fetch(url, {
+    fetch(url, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
@@ -84,25 +85,13 @@ class InterviewStore {
           alert("There is an overlap in date and time");
         } else {
           this.interviews
-            .filter(
-              interview => interview.id.toString() !== action.data.id.toString()
-            )
+            .filter(interview => interview.id.toString() !== id.toString())
             .push(data);
           //   dispatch(editInterview(data));
           alert("The Interview is updated");
         }
-      })
-      .catch(error => {
-        alert("Error:", error);
       });
   };
-
-  // Get Interview with id
-  @computed getInterviewWithId(id) {
-    return this.interviews.find(
-      interview => interview.id.toString() === id.toString()
-    );
-  }
 }
 
 const store = new InterviewStore();

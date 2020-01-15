@@ -5,7 +5,9 @@ import { inject, observer } from "mobx-react";
 class Show extends Component {
   render() {
     const { id } = this.props.match.params;
-    const interview = this.props.InterviewStore.getInterviewWithId(id);
+    const interview = this.props.InterviewStore.interviews.find(
+      interview => interview.id.toString() === id.toString()
+    );
     if (!interview) {
       return <div>Loading . . . </div>;
     } else {

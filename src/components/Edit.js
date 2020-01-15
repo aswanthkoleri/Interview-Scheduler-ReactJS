@@ -11,7 +11,7 @@ class Edit extends Component {
     const title = e.target.elements.title.value;
     const participants = e.target.elements.participants.value;
     const { id } = this.props.match.params;
-    this.props.InterviewStore.updateInterview(
+    this.props.InterviewStore.editInterview(
       id,
       date,
       start,
@@ -22,7 +22,9 @@ class Edit extends Component {
   };
   render() {
     const { id } = this.props.match.params;
-    const interview = this.props.InterviewStore.getInterviewWithId(id);
+    const interview = this.props.InterviewStore.interviews.find(
+      interview => interview.id.toString() === id.toString()
+    );
     if (!interview) {
       return <div> Loading ... </div>;
     } else {
