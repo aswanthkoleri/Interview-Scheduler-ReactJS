@@ -11,7 +11,3 @@ An Interview scheduler made using ReactJS with the APIs previously build using R
 
 Node version : v12.14.1<br>
 NPM version : 6.13.4
-
-
-## Directory Structure
-
