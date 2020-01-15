@@ -16,14 +16,13 @@ class Edit extends Component {
     request.open("PUT", url, true);
     // Set the request header i.e. which type of content you are sending
     request.setRequestHeader("Content-Type", "application/json");
-    request;
     // Create a state change callback
     request.onreadystatechange = function() {
       // console.log("Successful outside");
       if (request.readyState === 4 && request.status === 200) {
         var res = JSON.parse(this.responseText);
 
-        if (res.code == 3000) {
+        if (res.code === 3000) {
           console.log("Successful");
           this.props.editInterview(res);
           alert("There is an overlap in date and time");
