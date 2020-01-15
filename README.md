@@ -2,6 +2,11 @@
 
 An Interview scheduler made using ReactJS with the APIs previously build using Ruby on rails.
 
+## Implementation details
+
+- The `master` branch has the Redux implementation of the App
+- The `mobx` branch has the Mobx implementation of the App
+
 ## Installation
 
 - Clone the repo `https://github.com/aswanthkoleri/Single-Page-Interview-Scheduler.git` and Folow the steps mentioned to run it. This is the backend and provide the API endpoints
