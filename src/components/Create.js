@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { render } from "@testing-library/react";
 import { connect } from "react-redux";
+import { createInterviewAction } from "../actions/createInterview";
 class Create extends Component {
   createInterview = e => {
     e.preventDefault();
@@ -9,38 +9,9 @@ class Create extends Component {
     const end = e.target.elements.end.value;
     const title = e.target.elements.title.value;
     const participants = e.target.elements.participants.value;
-    let request = new XMLHttpRequest();
-    let url = "http://localhost:3001/api/v1/interviews/";
-    // open a connection
-    request.open("POST", url, true);
-    // Set the request header i.e. which type of content you are sending
-    request.setRequestHeader("Content-Type", "application/json");
-    // Create a state change callback
-    request.onreadystatechange = function() {
-      console.log("Successful outside");
-      if (request.readyState === 4 && request.status === 200) {
-        var res = JSON.parse(this.responseText);
-        if (res.code == 3000) {
-          this.props.newInterview(res);
-          console.log("Successful");
-          alert("There is an overlap in date and time");
-        } else {
-          alert("The Interview is created");
-        }
-      }
-    };
-    // Converting JSON data to string
-    var data = JSON.stringify({
-      date: date,
-      start: start,
-      end: end,
-      title: title,
-      participantlist: participants
-    });
-
-    // Sending data with the request
-    request.send(data);
-    //  this.props.newInterview({ "date": date, "start": start, "end": end, "title": title,"participantlist": participants })
+    this.props.dispatch(
+      createInterviewAction(date, start, end, title, participants)
+    );
   };
   render() {
     const jsx = (
@@ -92,15 +63,7 @@ class Create extends Component {
     return jsx;
   }
 }
-
-const mapDispatchToProps = dispatch => {
-  return {
-    newInterview: interview => {
-      dispatch({ type: "NEW_INTERVIEW", data: interview });
-    }
-  };
-};
 const mapStateToProps = state => {
   return {};
 };
-export default connect(mapStateToProps, mapDispatchToProps)(Create);
+export default connect(mapStateToProps)(Create);
